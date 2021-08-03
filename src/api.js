@@ -9,8 +9,13 @@ const api = (function() {
         const res = await fetch(`${host}/${path}`, { ...postReq, body });
         return await res.json();
     }
-    const get = async (path, query) => {
+    const get = async (path, query = '') => {
         const res = await fetch(`${host}/${path}?${query}`);
+        return await res.json();
+    }
+
+    const del = async path => {
+        const res = await fetch(`${host}/${path}`);
         return await res.json();
     }
 
@@ -19,9 +24,15 @@ const api = (function() {
         return result;
     }
 
-    const read = async data => {
-        const result = await get('read/skillevals', '');
+    const read = async () => {
+        const result = await get('read/skillevals');
         return result;
+    }
+
+    const delSkill = async id => {
+        if(!id) { return; }
+        const result = await del('del/skillevals/' + id);
+        return result; 
     }
 
     return {
@@ -29,13 +40,13 @@ const api = (function() {
           return await write(newskill);
         },
         delete: async id => {
-
+            return await delSkill(id);
         },
         update: async skill => {
             return await write(skill);
         },
         read: async id => {
-            return await read(id ? { id } : {});
+            return await read();
         }
     };
 })();

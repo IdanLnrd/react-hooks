@@ -7,6 +7,12 @@ import SkillEvalTable from './tables/SkillEvalTable'
 const App = () => {
 	// Data
 	const skillsData = [];
+	const updateView = async () => {
+		const { result: skills } = await api.read();
+		setSkills(skills);
+	}
+
+	updateView();
 
 	const initialFormState = { id: null, title: '', description: '' };
 
@@ -18,24 +24,27 @@ const App = () => {
 	// CRUD operations
 	const addSkill = async skill => {
 		//skill.id = skills.length + 1;
-		await api.create(skill);
-		const { result: skills } = await api.read();
+		await api.create(skill);	
 		// setSkills([ ...skills, skill ]);
-		setSkills(skills);
+		updateView();
 	}
 
-	const deleteSkill = id => {
+	const deleteSkill = async id => {
 		setEditing(false)
-		setSkills(skills.filter(s => s.id !== id))
+		// setSkills(skills.filter(s => s.id !== id))
+		await api.delete(id);
+		updateView();
 	}
 
-	const updateSkill = (id, updatedSkill) => {
+	const updateSkill = async (id, updatedSkill) => {
 		setEditing(false)
-
-		setSkills(skills.map(skill => (skill.id === id ? updatedSkill : skill)))
+		// setSkills(skills.map(skill => (skill.id === id ? updatedSkill : skill)))
+		updatedSkill.id = id;
+		await api.update(updatedSkill);
+		updateView();
 	}
 
-	const editRow = skill => {
+	const editRow = async skill => {
 		setEditing(true)
 
 		setCurrentSkill({ id: skill.id, title: skill.title, description: skill.description })
