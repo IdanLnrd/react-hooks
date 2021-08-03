@@ -28,6 +28,8 @@ const EditSkillEvalForm = props => {
       <input type="text" name="title" value={skill.title} onChange={handleInputChange} />
       <label>Description</label>
       <input type="text" name="description" value={skill.description} onChange={handleInputChange} />
+      <label>Level</label>
+			<input type="number" name="level" value={skill.level} onChange={handleInputChange} />
       <button>Update user</button>
       <button onClick={() => props.setEditing(false)} className="button muted-button">
         Cancel

@@ -1,4 +1,4 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState, Fragment, useEffect } from 'react'
 import api from './api'
 import AddSkillEvalForm from './forms/AddSkillEvalForm'
 import EditSkillEvalForm from './forms/EditSkillEvalForm'
@@ -10,6 +10,7 @@ const App = () => {
 	const updateView = async () => {
 		const { result: skills } = await api.read();
 		setSkills(skills);
+		console.log(skills);
 	}
 
 	// updateView();
@@ -20,6 +21,13 @@ const App = () => {
 	const [ skills, setSkills ] = useState(skillsData)
 	const [ currentSkill, setCurrentSkill ] = useState(initialFormState)
 	const [ editing, setEditing ] = useState(false)
+
+	useEffect(() => {
+		updateView();
+		return () => {
+			
+		};
+	}, []);
 
 	// CRUD operations
 	const addSkill = async skill => {

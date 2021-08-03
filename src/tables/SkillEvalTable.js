@@ -6,6 +6,8 @@ const SkillEvalTable = props => (
       <tr>
         <th>Title</th>
         <th>Description</th>
+        <th>Evaluation</th>
+        <th>Level</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -14,7 +16,13 @@ const SkillEvalTable = props => (
         props.skills.map(skill => (
           <tr key={skill.id}>
             <td>{skill.title}</td>
+           
             <td>{skill.description}</td>
+            <td>
+              <a href="/survey" data-id="skill.id" target="_blank">{skill.evaluation || 'None'}</a>
+            </td>
+            <td>{skill.level}</td>
+
             <td>
               <button
                 onClick={() => {

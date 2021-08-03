@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 const AddSkillEvalForm = props => {
-	const initialFormState = { id: null, title: '', description: '' }
+	const initialFormState = { id: null, title: '', description: '', level: 0 }
 	const [ skill, setSkill ] = useState(initialFormState)
 
 	const handleInputChange = event => {
@@ -23,6 +23,8 @@ const AddSkillEvalForm = props => {
 			<input type="text" name="title" value={skill.title} onChange={handleInputChange} />
 			<label>Description</label>
 			<input type="text" name="description" value={skill.description} onChange={handleInputChange} />
+			<label>Level</label>
+			<input type="number" name="level" value={skill.level} onChange={handleInputChange} />
 			<button>Add new skill</button>
 		</form>
 	)
