@@ -1,4 +1,5 @@
 import React, { useState, Fragment } from 'react'
+import api from './api'
 import AddSkillEvalForm from './forms/AddSkillEvalForm'
 import EditSkillEvalForm from './forms/EditSkillEvalForm'
 import SkillEvalTable from './tables/SkillEvalTable'
@@ -15,9 +16,12 @@ const App = () => {
 	const [ editing, setEditing ] = useState(false)
 
 	// CRUD operations
-	const addSkill = skill => {
-		skill.id = skills.length + 1
-		setSkills([ ...skills, skill ])
+	const addSkill = async skill => {
+		//skill.id = skills.length + 1;
+		await api.create(skill);
+		const { result: skills } = await api.read();
+		// setSkills([ ...skills, skill ]);
+		setSkills(skills);
 	}
 
 	const deleteSkill = id => {
@@ -60,7 +64,7 @@ const App = () => {
 					)}
 				</div>
 				<div className="flex-large">
-					<h2>Skill Evaluators</h2>
+					<h2>Skills</h2>
 					<SkillEvalTable skills={skills} editRow={editRow} deleteSkill={deleteSkill} />
 				</div>
 			</div>
