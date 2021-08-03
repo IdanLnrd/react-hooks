@@ -8,7 +8,8 @@ const SkillEvalTable = props => (
         <th>Description</th>
         <th>Evaluation</th>
         <th>Level</th>
-        <th>Actions</th>
+      
+        {props.canEdit ? <th>Actions</th>: <th></th>}
       </tr>
     </thead>
     <tbody>
@@ -24,8 +25,8 @@ const SkillEvalTable = props => (
                 target="_blank">{skill.evaluation ? 'Survey' : 'Create' }</a>
             </td>
             <td>{skill.level}</td>
-
-            <td>
+        
+            { props.canEdit ?             <td>
               <button
                 onClick={() => {
                   props.editRow(skill)
@@ -40,7 +41,8 @@ const SkillEvalTable = props => (
               >
                 Delete
               </button>
-            </td>
+            </td>: <td></td>}
+
           </tr>
         ))
       ) : (

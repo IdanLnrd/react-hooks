@@ -26,8 +26,11 @@ const api = (function() {
         return result;
     }
 
-    const read = async () => {
-        const result = await get('read/skillevals');
+    const read = async query => {
+        console.log('read: ', query);
+        const { tags } = query;
+        const qs = `${tags && tags.length > 0 ? 'tags=' + tags.join(',') : ''}`;
+        const result = await get(`read/skillevals`, qs);
         return result;
     }
 
@@ -47,8 +50,12 @@ const api = (function() {
         update: async skilleval => {
             return await write({ skilleval });
         },
-        read: async () => {
-            return await read();
+        read: async (query) => {
+            return await read(query);
+        },
+        data: async () => {
+            const res = await fetch('http://localhost:4000/SearchTermsTable.json');
+            return await res.json();
         }
     };
 })();

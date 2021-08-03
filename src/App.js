@@ -6,12 +6,16 @@ import {
 	Switch,
 	Route
   } from "react-router-dom";
+import SkillForm from './forms/SkillForm';
 const App = () => {
 
 	return (
 		<div className="container">
 			<Router>
 				<Switch>
+					<Route path="/skill">
+						<SkillForm/>
+					</Route>
 					<Route path="/survey">
 						<Survey/>
 					</Route>

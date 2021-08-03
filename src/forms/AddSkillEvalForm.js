@@ -25,7 +25,7 @@ const AddSkillEvalForm = props => {
 			<input type="text" name="description" value={skill.description} onChange={handleInputChange} />
 			<label>Level</label>
 			<input type="number" name="level" value={skill.level} onChange={handleInputChange} />
-			<button>Add new skill</button>
+			<button>Create</button>
 		</form>
 	)
 }

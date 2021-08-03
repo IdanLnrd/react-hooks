@@ -3,3 +3,27 @@ button,
 	margin-bottom: 0 !important;
 	margin-right: .5rem;
 }
+
+form {
+	position: relative;
+}
+
+.suggestions-container {
+	position: absolute;
+	margin: auto;
+	box-sizing: border-box;
+	padding: 16px;
+	z-index: 1;
+	background: white;
+	border-radius: 12px;
+	width: 100%;
+	box-shadow: 4px 5px 10px rgba(0, 0 ,0, 0.3);
+}
+.suggest {
+	border-radius: 8px;
+	cursor: pointer;
+	padding: 8px;
+}
+.suggest:hover {
+	background-color: rgba(0, 0 ,0, 0.1);
+}
