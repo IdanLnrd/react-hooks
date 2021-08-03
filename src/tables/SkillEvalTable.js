@@ -19,7 +19,9 @@ const SkillEvalTable = props => (
            
             <td>{skill.description}</td>
             <td>
-              <a href="/survey" data-id="skill.id" target="_blank">{skill.evaluation || 'None'}</a>
+              <a href={'/survey?id=' + skill.id} 
+                rel="noopener noreferrer" 
+                target="_blank">{skill.evaluation || 'None'}</a>
             </td>
             <td>{skill.level}</td>
 
