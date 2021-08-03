@@ -15,7 +15,7 @@ const api = (function() {
     }
 
     const del = async path => {
-        const res = await fetch(`${host}/${path}`);
+        const res = await fetch(`${host}/${path}`, { method: 'delete' });
         return await res.json();
     }
 
@@ -31,7 +31,7 @@ const api = (function() {
 
     const delSkill = async id => {
         if(!id) { return; }
-        const result = await del('del/skillevals/' + id);
+        const result = await del('delete/skillevals/' + id);
         return result; 
     }
 
