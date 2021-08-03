@@ -1,72 +1,67 @@
 import React, { useState, Fragment } from 'react'
-import AddUserForm from './forms/AddUserForm'
-import EditUserForm from './forms/EditUserForm'
-import UserTable from './tables/UserTable'
+import AddSkillEvalForm from './forms/AddSkillEvalForm'
+import EditSkillEvalForm from './forms/EditSkillEvalForm'
+import SkillEvalTable from './tables/SkillEvalTable'
 
 const App = () => {
 	// Data
-	const usersData = [
-		{ id: 1, name: 'Tania', username: 'floppydiskette' },
-		{ id: 2, name: 'Craig', username: 'siliconeidolon' },
-		{ id: 3, name: 'Ben', username: 'benisphere' },
-	]
+	const skillsData = [];
 
-	const initialFormState = { id: null, name: '', username: '' }
+	const initialFormState = { id: null, title: '', description: '' };
 
 	// Setting state
-	const [ users, setUsers ] = useState(usersData)
-	const [ currentUser, setCurrentUser ] = useState(initialFormState)
+	const [ skills, setSkills ] = useState(skillsData)
+	const [ currentSkill, setCurrentSkill ] = useState(initialFormState)
 	const [ editing, setEditing ] = useState(false)
 
 	// CRUD operations
-	const addUser = user => {
-		user.id = users.length + 1
-		setUsers([ ...users, user ])
+	const addSkill = skill => {
+		skill.id = skills.length + 1
+		setSkills([ ...skills, skill ])
 	}
 
-	const deleteUser = id => {
+	const deleteSkill = id => {
+		setEditing(false)
+		setSkills(skills.filter(s => s.id !== id))
+	}
+
+	const updateSkill = (id, updatedSkill) => {
 		setEditing(false)
 
-		setUsers(users.filter(user => user.id !== id))
+		setSkills(skills.map(skill => (skill.id === id ? updatedSkill : skill)))
 	}
 
-	const updateUser = (id, updatedUser) => {
-		setEditing(false)
-
-		setUsers(users.map(user => (user.id === id ? updatedUser : user)))
-	}
-
-	const editRow = user => {
+	const editRow = skill => {
 		setEditing(true)
 
-		setCurrentUser({ id: user.id, name: user.name, username: user.username })
+		setCurrentSkill({ id: skill.id, title: skill.title, description: skill.description })
 	}
 
 	return (
 		<div className="container">
-			<h1>CRUD App with Hooks</h1>
+			<h1>Skill Evaluator</h1>
 			<div className="flex-row">
 				<div className="flex-large">
 					{editing ? (
 						<Fragment>
-							<h2>Edit user</h2>
-							<EditUserForm
+							<h2>Edit skill</h2>
+							<EditSkillEvalForm
 								editing={editing}
 								setEditing={setEditing}
-								currentUser={currentUser}
-								updateUser={updateUser}
+								currentSkill={currentSkill}
+								updateSkill={updateSkill}
 							/>
 						</Fragment>
 					) : (
 						<Fragment>
-							<h2>Add user</h2>
-							<AddUserForm addUser={addUser} />
+							<h2>Add skill</h2>
+							<AddSkillEvalForm addSkill={addSkill} />
 						</Fragment>
 					)}
 				</div>
 				<div className="flex-large">
-					<h2>View users</h2>
-					<UserTable users={users} editRow={editRow} deleteUser={deleteUser} />
+					<h2>Skill Evaluators</h2>
+					<SkillEvalTable skills={skills} editRow={editRow} deleteSkill={deleteSkill} />
 				</div>
 			</div>
 		</div>

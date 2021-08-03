@@ -1,31 +1,31 @@
 import React from 'react'
 
-const UserTable = props => (
+const SkillEvalTable = props => (
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Username</th>
+        <th>Title</th>
+        <th>Description</th>
         <th>Actions</th>
       </tr>
     </thead>
     <tbody>
-      {props.users.length > 0 ? (
-        props.users.map(user => (
-          <tr key={user.id}>
-            <td>{user.name}</td>
-            <td>{user.username}</td>
+      {props.skills.length > 0 ? (
+        props.skills.map(skill => (
+          <tr key={skill.id}>
+            <td>{skill.title}</td>
+            <td>{skill.description}</td>
             <td>
               <button
                 onClick={() => {
-                  props.editRow(user)
+                  props.editRow(skill)
                 }}
                 className="button muted-button"
               >
                 Edit
               </button>
               <button
-                onClick={() => props.deleteUser(user.id)}
+                onClick={() => props.deleteSkill(skill.id)}
                 className="button muted-button"
               >
                 Delete
@@ -42,4 +42,4 @@ const UserTable = props => (
   </table>
 )
 
-export default UserTable
+export default SkillEvalTable;
