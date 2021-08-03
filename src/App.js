@@ -12,7 +12,7 @@ const App = () => {
 		setSkills(skills);
 	}
 
-	updateView();
+	// updateView();
 
 	const initialFormState = { id: null, title: '', description: '' };
 

@@ -20,7 +20,9 @@ const api = (function() {
     }
 
     const write = async data => {
+        console.log('[write] data:', data);
         const result = await post('write/skilleval', data);
+        console.log('[write] result:', result);
         return result;
     }
 
@@ -36,16 +38,16 @@ const api = (function() {
     }
 
     return {
-        create: async newskill => {
-          return await write(newskill);
+        create: async skilleval => {
+          return await write({ skilleval });
         },
         delete: async id => {
             return await delSkill(id);
         },
-        update: async skill => {
-            return await write(skill);
+        update: async skilleval => {
+            return await write({ skilleval });
         },
-        read: async id => {
+        read: async () => {
             return await read();
         }
     };
